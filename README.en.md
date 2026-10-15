@@ -12,24 +12,42 @@ The laptop has three displays: one in the center and one wing on each side. Wind
 
 The BIOS leaves bit 2 of `SOUTH_CHICKEN1` (`ICP_SECOND_PPS_IO_SELECT`) clear. `i915` then drops the second internal display on DDI B with `unusable PPS, disabling eDP`. This module sets that bit before `i915` starts.
 
-## Build
+## Installation
+
+The headers for the running kernel must be installed. From the driver directory:
+
+```bash
+sudo ./install.sh
+```
+
+`sudo make install` does the same. The script builds the module, copies it to `/lib/modules/$(uname -r)/updates/`, installs `/etc/modprobe.d/i915-second-pps.conf`, updates the initramfs, and writes the GRUB entry for two displays unless one containing `modprobe.blacklist=i915_second_pps` is already there.
+
+Reboot afterwards. The log should contain `i915_second_pps: SOUTH_CHICKEN1 0x901 -> 0x905`, and the second side panel shows up as `eDP-2`. After a kernel update, run `sudo ./install.sh` again.
+
+## Remove
+
+```bash
+sudo ./uninstall.sh
+```
+
+This removes the module, the modprobe file, and the GRUB entry written by the installer. An entry added by hand is left in place.
+
+## By hand
+
+### Build
 
 ```bash
 make
 ```
 
-The headers for the running kernel must be installed.
-
-## Install
+### Install
 
 ```bash
 sudo install -D -m 644 i915_second_pps.ko /lib/modules/$(uname -r)/updates/i915_second_pps.ko
 sudo install -m 644 i915-second-pps.conf /etc/modprobe.d/i915-second-pps.conf
 sudo depmod -a
-sudo update-initramfs -u
+sudo update-initramfs -u -k "$(uname -r)"
 ```
-
-Reboot afterwards. The log should contain `i915_second_pps: SOUTH_CHICKEN1 0x901 -> 0x905`, and the second side panel shows up as `eDP-2`.
 
 ## Back to two displays
 
