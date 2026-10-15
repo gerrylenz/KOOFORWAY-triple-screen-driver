@@ -1,6 +1,6 @@
-# debian-laptop-zweiter-bildschirm
+# KOOFORWAY-zweiter-bildschirm
 
-Kernelmodul für den Rechner `debian-laptop` (Alder Lake-P, Intel Iris Xe, PCI `8086:46a6`). Es schaltet den zweiten internen Bildschirm ein.
+Kernelmodul für den Laptop KOOFORWAY (Alder Lake-P, Intel Iris Xe, PCI `8086:46a6`). Es schaltet den zweiten internen Bildschirm ein.
 
 Das BIOS lässt Bit 2 in `SOUTH_CHICKEN1` (`ICP_SECOND_PPS_IO_SELECT`) aus. `i915` verwirft deshalb den zweiten internen Bildschirm an DDI B mit `unusable PPS, disabling eDP`. Das Modul setzt dieses Bit, bevor `i915` startet.
 
