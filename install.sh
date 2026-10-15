@@ -18,7 +18,11 @@ if [[ ! -d /lib/modules/${kver}/build ]]; then
 fi
 
 echo "Baue das Modul für ${kver} …"
-make -C "$root" all
+if command -v gcc-15 >/dev/null 2>&1; then
+	make -C "$root" all
+else
+	make -C "$root" all CC=gcc
+fi
 
 echo "Installiere Modul und Modprobe-Datei …"
 install -D -m 644 "${root}/i915_second_pps.ko" "/lib/modules/${kver}/updates/i915_second_pps.ko"

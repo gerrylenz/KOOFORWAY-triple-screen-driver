@@ -12,17 +12,48 @@ Der Laptop hat drei Bildschirme: die Mitte und je einen Flügel links und rechts
 
 Das BIOS lässt Bit 2 in `SOUTH_CHICKEN1` (`ICP_SECOND_PPS_IO_SELECT`) aus. `i915` verwirft deshalb den zweiten internen Bildschirm an DDI B mit `unusable PPS, disabling eDP`. Das Modul setzt dieses Bit, bevor `i915` startet.
 
-## Installation
+## Schritt für Schritt
 
-Die Header des laufenden Kernels müssen installiert sein. Im Verzeichnis des Treibers:
+Jede Zeile in ein Terminal eintippen oder hineinkopieren und mit Enter bestätigen. Wenn nach einem Passwort gefragt wird, tippen und Enter drücken. Dabei erscheinen keine Zeichen.
+
+### 1. Terminal öffnen
+
+Das Anwendungsmenü öffnen, nach „Konsole“ oder „Terminal“ suchen und das Programm starten.
+
+### 2. Git installieren
+
+```bash
+sudo apt update
+sudo apt install git build-essential linux-headers-$(uname -r)
+```
+
+Git holt den Treiber. `build-essential` enthält die Werkzeuge zum Bauen. Die Header gehören zum laufenden Kernel.
+
+### 3. Den Treiber holen
+
+```bash
+cd
+git clone https://github.com/gerrylenz/KOOFORWAY-triple-screen-driver.git
+cd KOOFORWAY-triple-screen-driver
+```
+
+Die Dateien liegen danach im Ordner `KOOFORWAY-triple-screen-driver` im persönlichen Verzeichnis.
+
+### 4. Installieren
 
 ```bash
 sudo ./install.sh
 ```
 
-Dasselbe macht `sudo make install`. Das Skript baut das Modul, kopiert es nach `/lib/modules/$(uname -r)/updates/`, legt `/etc/modprobe.d/i915-second-pps.conf` an, aktualisiert die Initrd und schreibt den GRUB-Eintrag für zwei Bildschirme, falls dort noch keiner mit `modprobe.blacklist=i915_second_pps` steht.
+Das Skript baut das Modul, kopiert es zum laufenden Kernel, legt die Modprobe-Datei an, aktualisiert die Initrd und schreibt den GRUB-Eintrag für zwei Bildschirme, falls dort noch keiner steht. `sudo make install` macht dasselbe.
 
-Danach neu starten. Im Log steht `i915_second_pps: SOUTH_CHICKEN1 0x901 -> 0x905`, und der zweite Flügel erscheint als `eDP-2`. Nach einem Kernel-Update `sudo ./install.sh` erneut ausführen.
+Am Ende steht: „Installation fertig. Neu starten …“
+
+### 5. Neu starten
+
+Den Rechner neu starten. Danach sind drei Bildschirme an. Der zweite Flügel heißt `eDP-2`.
+
+Nach einem späteren Kernel-Update im selben Ordner erneut `sudo ./install.sh` ausführen.
 
 ## Entfernen
 

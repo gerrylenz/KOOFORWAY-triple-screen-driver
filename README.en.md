@@ -12,17 +12,48 @@ The laptop has three displays: one in the center and one wing on each side. Wind
 
 The BIOS leaves bit 2 of `SOUTH_CHICKEN1` (`ICP_SECOND_PPS_IO_SELECT`) clear. `i915` then drops the second internal display on DDI B with `unusable PPS, disabling eDP`. This module sets that bit before `i915` starts.
 
-## Installation
+## Step by step
 
-The headers for the running kernel must be installed. From the driver directory:
+Type each line into a terminal, or paste it, and press Enter. When a password is requested, type it and press Enter. Nothing is shown while you type.
+
+### 1. Open a terminal
+
+Open the application menu, search for “Console” or “Terminal”, and start it.
+
+### 2. Install Git
+
+```bash
+sudo apt update
+sudo apt install git build-essential linux-headers-$(uname -r)
+```
+
+Git fetches the driver. `build-essential` contains the tools that build it. The headers belong to the running kernel.
+
+### 3. Get the driver
+
+```bash
+cd
+git clone https://github.com/gerrylenz/KOOFORWAY-triple-screen-driver.git
+cd KOOFORWAY-triple-screen-driver
+```
+
+The files are then in the folder `KOOFORWAY-triple-screen-driver` in the home directory.
+
+### 4. Install
 
 ```bash
 sudo ./install.sh
 ```
 
-`sudo make install` does the same. The script builds the module, copies it to `/lib/modules/$(uname -r)/updates/`, installs `/etc/modprobe.d/i915-second-pps.conf`, updates the initramfs, and writes the GRUB entry for two displays unless one containing `modprobe.blacklist=i915_second_pps` is already there.
+The script builds the module, copies it to the running kernel, installs the modprobe file, updates the initramfs, and writes the GRUB entry for two displays unless one is already there. `sudo make install` does the same.
 
-Reboot afterwards. The log should contain `i915_second_pps: SOUTH_CHICKEN1 0x901 -> 0x905`, and the second side panel shows up as `eDP-2`. After a kernel update, run `sudo ./install.sh` again.
+At the end it prints that the installation is finished and a reboot is needed.
+
+### 5. Reboot
+
+Reboot the computer. After that, three displays are on. The second wing is `eDP-2`.
+
+After a later kernel update, run `sudo ./install.sh` again from the same folder.
 
 ## Remove
 
