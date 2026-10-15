@@ -1,4 +1,4 @@
-# KOOFORWAY-zweiter-bildschirm
+# KOOFORWAY-triple-screen-driver
 
 [English](README.en.md)
 
