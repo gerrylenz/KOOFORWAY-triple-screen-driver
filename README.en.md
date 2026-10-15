@@ -33,8 +33,38 @@ Reboot afterwards. The log should contain `i915_second_pps: SOUTH_CHICKEN1 0x901
 
 ## Back to two displays
 
-Append this to the kernel command line:
+`modprobe.blacklist=i915_second_pps` keeps the module from loading. `i915` then starts as it did without this driver: the center and one wing on, the other wing dark. The normal menu entry remains the boot with three displays.
+
+### Try it once
+
+In the GRUB menu, select the normal entry and press `e`. At the end of the line that starts with `linux`, append:
 
 ```text
 modprobe.blacklist=i915_second_pps
 ```
+
+Boot with Ctrl+X or F10. The addition applies only to this boot.
+
+### A separate menu entry
+
+In `/etc/grub.d/40_custom`, leave the `exec tail` line in place. Add a second entry below it. The kernel, initrd, and the rest of the kernel command line must match the normal entry. Only the blacklist parameter is added:
+
+```sh
+menuentry 'KOOFORWAY, two displays' {
+	load_video
+	insmod gzio
+	insmod part_gpt
+	insmod ext2
+	search --no-floppy --fs-uuid --set=root b7162e8c-fc38-46ec-a561-a1fa43beb125
+	linux /boot/vmlinuz-6.17.7-061707-generic root=UUID=b7162e8c-fc38-46ec-a561-a1fa43beb125 ro i915.force_probe=46a6 i915.enable_psr=0 i915.edp_vswing=2 i915.panel_use_ssc=0 i915.debug=edp modprobe.blacklist=i915_second_pps
+	initrd /boot/initrd.img-6.17.7-061707-generic
+}
+```
+
+Then:
+
+```bash
+sudo update-grub
+```
+
+The entry shows up at the bottom of the menu and stays across reboots. After a kernel update, change the `vmlinuz-…` and `initrd.img-…` paths in this entry to the new version and run `update-grub` again.
