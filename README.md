@@ -47,7 +47,13 @@ Mit Strg+X oder F10 starten. Die Ergänzung gilt nur für diesen Start.
 
 ### Eigener Menüeintrag
 
-In `/etc/grub.d/40_custom` bleibt die Zeile `exec tail` stehen. Darunter einen zweiten Eintrag ergänzen. Kernel, Initrd und die übrige Kernelzeile müssen zum normalen Eintrag passen. Nur der Blacklist-Parameter kommt dazu:
+Die Datei mit nano öffnen:
+
+```bash
+sudo nano /etc/grub.d/40_custom
+```
+
+Die Zeile `exec tail` bleibt stehen. Den folgenden Block ans Ende der Datei setzen. Kernel, Initrd und die übrige Kernelzeile müssen zum normalen Eintrag passen. Nur der Blacklist-Parameter kommt dazu:
 
 ```sh
 menuentry 'KOOFORWAY, zwei Bildschirme' {
@@ -61,7 +67,7 @@ menuentry 'KOOFORWAY, zwei Bildschirme' {
 }
 ```
 
-Danach:
+Speichern mit Strg+O und Enter, nano mit Strg+X verlassen. Danach das Menü neu schreiben:
 
 ```bash
 sudo update-grub

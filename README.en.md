@@ -47,7 +47,13 @@ Boot with Ctrl+X or F10. The addition applies only to this boot.
 
 ### A separate menu entry
 
-In `/etc/grub.d/40_custom`, leave the `exec tail` line in place. Add a second entry below it. The kernel, initrd, and the rest of the kernel command line must match the normal entry. Only the blacklist parameter is added:
+Open the file with nano:
+
+```bash
+sudo nano /etc/grub.d/40_custom
+```
+
+Leave the `exec tail` line in place. Put the following block at the end of the file. The kernel, initrd, and the rest of the kernel command line must match the normal entry. Only the blacklist parameter is added:
 
 ```sh
 menuentry 'KOOFORWAY, two displays' {
@@ -61,7 +67,7 @@ menuentry 'KOOFORWAY, two displays' {
 }
 ```
 
-Then:
+Save with Ctrl+O and Enter, then leave nano with Ctrl+X. Then rebuild the menu:
 
 ```bash
 sudo update-grub
