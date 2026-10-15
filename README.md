@@ -2,7 +2,7 @@
 
 [English](README.en.md)
 
-Kernelmodul für den Laptop KOOFORWAY (Alder Lake-P, Intel Iris Xe, PCI `8086:46a6`). Es schaltet alle Bildschirme ein.
+Kernelmodul für den Laptop KOOFORWAY Triple Screen (Alder Lake-P, Intel Iris Xe, PCI `8086:46a6`) um alle 3 Bildschirme nutzen zu können.
 
 ## Das Problem
 

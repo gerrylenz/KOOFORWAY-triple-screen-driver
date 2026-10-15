@@ -2,7 +2,7 @@
 
 [Deutsch](README.md)
 
-Kernel module for the KOOFORWAY laptop (Alder Lake-P, Intel Iris Xe, PCI `8086:46a6`). It turns on all of the displays.
+Kernel module for the KOOFORWAY Triple Screen laptop (Alder Lake-P, Intel Iris Xe, PCI `8086:46a6`) so that all 3 displays can be used.
 
 ## The problem
 
