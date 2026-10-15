@@ -4,6 +4,10 @@
 
 Kernel module for the KOOFORWAY Triple Screen laptop (Alder Lake-P, Intel Iris Xe, PCI `8086:46a6`) so that all 3 displays can be used.
 
+After installation, KDE’s display settings show all three screens: the wing on the left over DisplayPort, and the built-in panels in the center and on the right.
+
+![Three displays in KDE System Settings](images/kde-drei-bildschirme.jpg)
+
 ## The problem
 
 The laptop has three displays: one in the center and one wing on each side. Windows drives all three. Linux keeps only the center and one wing. The other wing stays dark, and the kernel never creates a connector for it.

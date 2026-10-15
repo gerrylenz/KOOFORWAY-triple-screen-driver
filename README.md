@@ -4,6 +4,10 @@
 
 Kernelmodul für den Laptop KOOFORWAY Triple Screen (Alder Lake-P, Intel Iris Xe, PCI `8086:46a6`) um alle 3 Bildschirme nutzen zu können.
 
+Nach der Installation zeigt die Anzeige-Einrichtung von KDE alle drei Bildschirme: links der Flügel über DisplayPort, in der Mitte und rechts die integrierten Bildschirme.
+
+![Drei Bildschirme in den KDE-Systemeinstellungen](images/kde-drei-bildschirme.jpg)
+
 ## Das Problem
 
 Der Laptop hat drei Bildschirme: die Mitte und je einen Flügel links und rechts. Unter Windows laufen alle drei. Unter Linux bleiben nur die Mitte und ein Flügel an. Der andere Flügel bleibt dunkel, und der Kernel legt keinen Anschluss dafür an.
