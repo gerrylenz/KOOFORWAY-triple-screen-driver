@@ -1,0 +1,24 @@
+// Deutsche QWERTZ-Belegung, angepasst an die aufgedruckten Ecken.
+// Ecke: oben links AltGr+Umschalt, oben rechts Umschalt,
+// unten links AltGr, unten rechts ohne Zusatztaste.
+default partial alphanumeric_keys
+xkb_symbols "basic" {
+    include "de(basic)"
+    name[Group1] = "German (KOOFORWAY)";
+
+    // Komma: oben links <, oben rechts ;, unten links und rechts ,
+    key <AB08> {
+        type[Group1] = "FOUR_LEVEL",
+        symbols[Group1] = [ comma, semicolon, comma, less ]
+    };
+    // Punkt: oben links >, oben rechts :, unten links und rechts .
+    key <AB09> {
+        type[Group1] = "FOUR_LEVEL",
+        symbols[Group1] = [ period, colon, period, greater ]
+    };
+    // Minus: oben links ?, oben rechts _, unten links /, unten rechts -
+    key <AB10> {
+        type[Group1] = "FOUR_LEVEL",
+        symbols[Group1] = [ minus, underscore, slash, question ]
+    };
+};

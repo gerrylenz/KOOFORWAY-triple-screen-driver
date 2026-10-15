@@ -127,3 +127,7 @@ sudo update-grub
 ```
 
 The entry shows up at the bottom of the menu and stays across reboots. After a kernel update, change the `vmlinuz-…` and `initrd.img-…` paths in this entry to the new version and run `update-grub` again.
+
+## Keyboard
+
+The comma, period, and minus keys are printed differently from the plain German layout. The matching layout for Linux and the steps for Windows 11 are in [keyboard/README.en.md](keyboard/README.en.md).

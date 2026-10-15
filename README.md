@@ -127,3 +127,7 @@ sudo update-grub
 ```
 
 Der Eintrag erscheint unten im Menü und bleibt über Neustarts erhalten. Nach einem Kernel-Update die Pfade `vmlinuz-…` und `initrd.img-…` in diesem Eintrag auf die neue Version setzen und `update-grub` erneut ausführen.
+
+## Tastatur
+
+Komma, Punkt und die Minustaste sind anders beschriftet als die normale deutsche Belegung. Die passende Belegung für Linux und die Schritte für Windows 11 stehen in [keyboard/README.md](keyboard/README.md).
